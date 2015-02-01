@@ -11,10 +11,10 @@ local jid_prep = jid.prep;
 local module_host = module:get_host();
 -- all hosts on the server
 local hosts = prosody.hosts;
--- depends on the groups module
-module:depends("groups");
 -- retrieve the module manager
 local modulemanager = require"core.modulemanager";
+-- depends on the groups module
+module:depends("groups");
 -- variable for all groups on host
 local groups = module:shared("groups/groups");
 
@@ -52,40 +52,17 @@ end
 
 -- called when the module is loaded on the server
 function module.load()
-	-- module:hook("roster-load", inject_roster_contacts);
-	-- datamanager.add_callback(remove_virtual_contacts);
-	
-	-- make sure the array exists
-	if groups then
-		--
-		local v = 0;
-		-- loop all hosts in sessions array
-		for groupName, members in pairs(groups) do
-			local c = 0;
-			for username in pairs(members) do
-				c = c + 1;
-			end;
-			module:log("info", "Group found: %s (members: %d)", groupName, c);
-			v = v + 1;
-		end
-		-- send log message
-		module:log("info", "Group annouce has %d groups", v);
-	else
-		-- send log message
-		module:log("info", "Groups array failure!");
-	end
 end
 
 -- called when the module is unloaded from the server
 function module.unload()
-	-- datamanager.remove_callback(remove_virtual_contacts);
 end
 
 -- Ad-hoc command (XEP-0133)
 --	Create the message input form for users
 local dataforms_new = require "util.dataforms".new;
 local message_layout = dataforms_new{
-	title = "Send a Group Message";
+	title = "Send Annoucement to Group";
 	instructions = "Fill out this form to send a message all\nmembers of a specific group.";
 
 	{ name = "FORM_TYPE", type = "hidden", value = "http://jabber.org/protocol/admin" };
