@@ -97,6 +97,6 @@ end
 -- load adhoc lib
 local adhoc_new = module:require "adhoc".new;
 -- create description of function
-local descriptor = adhoc_new("Send Message to Group", "http://jabber.org/protocol/admin#group_announce", message_command_handler);
+local descriptor = adhoc_new("Send Annoucement to Group", "http://jabber.org/protocol/admin#group_announce", message_command_handler);
 -- add to options list
 module:provides("adhoc", descriptor);
